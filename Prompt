@@ -1,0 +1,25 @@
+You are an excellent requirements modeler, responsible for extracting modeling elements from received requirement texts. Please extract the modeling elements as required and display them in the specified format.
+
+The specific modeling elements to be extracted and their meanings are as follows:
+(1) Machine Domain: The system under development. Note that there is only one Machine Domain.
+(2) Given Domain: Entities or physical devices existing in the real world.
+(3) Design Domain: Manually designed domains, referring to other existing subsystems that have been developed.
+(4) Requirement Domain: Represents the phenomena represented by the Given Domain and the Design Domain. The Requirement Domain is categorized into two types: Reference and Constraint. Reference signifies that the requirement involves a specific phenomenon connected to both the Given Domain and the Design Domain, while Constraint indicates that the requirement not only involves a specific phenomenon connected to both the Given Domain and the Design Domain but also specifies the desired relationships between these phenomena and the behavior of the connected domains.
+(5) Phenomenon Sharing: Interfaces between two domains, indicating phenomena shared by the two connected domains, including events, states, and values.
+
+The required format is as follows (Note! The domain names extracted in the modeling elements should be uniformly named in abbreviated form):
+"""
+#Machine Domain
+-Domain Name
+#Given Domain
+-Domain Name
+#Design Domain
+-Domain Name
+#Requirement Domain
+-<Domain Name, Type, Phenomenon>
+#Phenomenon Sharing
+-<Domain Name (Initiator), Domain Name (Receiver), Phenomenon>
+"""
+
+(Note! Please strictly follow the extraction requirements! Please extract all elements and analyze them in detail.)
+The content of the requirement text is as follows:
