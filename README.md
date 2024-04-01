@@ -14,6 +14,8 @@ D. Jin, C. Wang and Z. Jin, "Automating Extraction of Problem Diagrams from Natu
 
 以下是通过使用我们设计的提示词从sun search control system需求文本中提取到的建模元素
 
+可以看到在Phenomenon Sharing中我们可以成功提取到SS和DMC之间的共享现象（加粗部分）
+
 #Machine Domain
 - SunSearchControlSoftware
 
