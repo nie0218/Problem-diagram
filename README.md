@@ -22,22 +22,18 @@ D. Jin, C. Wang and Z. Jin, "Automating Extraction of Problem Diagrams from Natu
 - SunSensors
 - ThreeAxisControlThrusters
 - DataManagementComputer
-- GroundOperatorCommands
 - SerialPort
-- Analog-to-DigitalConverter (ADC)
+- Analog-to-DigitalConverter
 - StoredCircuit
-- Microcontroller80C32E
 - Timer
 - ControllerRegisters
 - DigitalTube
 
+- InterruptServiceProgram
+- Satellite
+
 #Design Domain
 - ControlSystem
-- SensorSubsystem
-- ActuatorSubsystem
-- ControllerSubsystem
-- MainProgram
-- InterruptServiceProgram
 
 #Requirement Domain
 - <Gyroscopes, Reference, Data Acquisition>
@@ -48,11 +44,8 @@ D. Jin, C. Wang and Z. Jin, "Automating Extraction of Problem Diagrams from Natu
 - <ThreeAxisControlThrusters, Constraint, Jetting Frequency>
 - <ControlSystem, Reference, Composition>
 - <ControlSystem, Constraint, Safety Criticality Level>
-- <MainProgram, Reference, Initialization>
-- <MainProgram, Constraint, Control Cycle>
 - <InterruptServiceProgram, Reference, Timer Interrupt>
 - <InterruptServiceProgram, Constraint, Timer Configuration>
-- <Microcontroller80C32E, Reference, Core>
 - <ControllerRegisters, Reference, Address>
 - <ControllerRegisters, Constraint, Register Configuration>
 - <DigitalTube, Reference, Telemetry Data Transmission>
@@ -64,8 +57,13 @@ D. Jin, C. Wang and Z. Jin, "Automating Extraction of Problem Diagrams from Natu
 - <SunSearchControlSoftware, SunSensors, Data Collection Format>
 - <SunSearchControlSoftware, ThreeAxisControlThrusters, Control>
 - <SunSearchControlSoftware, ThreeAxisControlThrusters, Jetting Frequency>
-- <SunSearchControlSoftware, MainProgram, Initialization>
 - <SunSearchControlSoftware, InterruptServiceProgram, Timer Interrupt>
-- <SunSearchControlSoftware, Microcontroller80C32E, Core>
 - <SunSearchControlSoftware, ControllerRegisters, Address>
 - <SunSearchControlSoftware, DigitalTube, Telemetry Data Transmission>
+- <SunSearchControlSoftware, SerialPort, Data Transmission>
+- <SunSearchControlSoftware, Timer, Control Cycle>
+- <SunSearchControlSoftware, SerialPort, Command Reception and Data Transmission>
+- <SunSensors, Analog-to-DigitalConverter, Data Conversion>
+- <ThreeAxisControlThrusters, Analog-to-DigitalConverter, Data Conversion>
+- **<DataManagementComputer, SunSearchControlSoftware, Ground Command Reception>**
+- <Satellite, SunSearchControlSoftware, Attitude Angle and Angular Velocity>
