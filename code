@@ -72,5 +72,8 @@ phenomena_sharing = [
 ]
 for sharing in phenomena_sharing:
     dot.edge(sharing[0], sharing[1], label=sharing[2], dir='none')
+
+# 添加现象共享 rankdir：指定图形的布局方向 nodesep：指定节点之间的水平间距 ranksep：指定节点之间的垂直间距。
+dot.attr(rankdir='LR',nodesep='0.3',ranksep='0.5')
 # 保存并展示图
 dot.render('Sun', format='png',cleanup=True)
