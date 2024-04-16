@@ -1,0 +1,78 @@
+import graphviz
+
+# 创建图
+dot = graphviz.Digraph()
+# Define nodes for machine domain
+dot.node('Sun Search Control Software', shape='component')
+
+# 给定领域和设计领域节点
+given_domains = [
+    'Gyroscopes',
+    'Sun Sensors',
+    'Three-axis Control Thrusters',
+    'Data Management Computer',
+    'Control Computer CPU',
+    'Satellite',
+    'Mode Register',
+    'Timer',
+    'Analog-to-Digital Converter',
+    'Digital Tube',
+    'Serial Ports',
+    'Timing Control Register',
+]
+
+for domain in given_domains:
+    dot.node(domain, shape='box')
+    dot.edge('Sun Search Control Software',domain, dir='none')
+
+
+# 添加需求领域和现象
+requirements = [
+    ('Satellite', 'Reference', 'Attitude Determination'),
+    ('Gyroscopes', 'Reference', 'Data Acquisition'),
+    ('Sun Sensors', 'Reference', 'Data Acquisition'),
+    ('Three-axis Control Thrusters', 'Reference', 'Control'),
+    ('Data Management Computer', 'Reference', 'Command Processing'),
+    ('Gyroscopes', 'Constraint', 'Data Acquisition Command'),
+    ('Gyroscopes', 'Constraint', 'Measurement Data'),
+    ('Sun Sensors', 'Constraint', 'Angle Measurement Data'),
+    ('Sun Sensors', 'Constraint', 'Sun Visible Flag'),
+    ('Three-axis Control Thrusters', 'Constraint', 'Power Status Signal'),
+    ('Three-axis Control Thrusters', 'Constraint', 'Thruster Control'),
+    ('Sun Sensors', 'Reference', 'Sun Sensor Switching Instruction'),
+    ('Analog-to-Digital Converter', 'Constraint', 'Data Conversion'),
+    ('Analog-to-Digital Converter', 'Reference', 'Signal Collection'),
+    ('Digital Tube', 'Reference', 'Telemetry Data Transmission')
+]
+
+for requirement in requirements:
+    dot.node(requirement[2], shape='ellipse', style='dashed')
+    if requirement[1] == 'Reference':
+        dot.edge(requirement[0], requirement[2], style='dashed', dir='none')
+    elif requirement[1] == 'Constraint':
+        dot.edge(requirement[0], requirement[2], style='dashed', dir='back')
+
+# 添加现象共享
+phenomena_sharing = [
+    ('Sun Sensors', 'Sun Search Control Software', 'Sun Measurement Angle'),
+    ('Sun Sensors', 'Sun Search Control Software', 'Sun Visible Flag'),
+    ('Gyroscopes', 'Sun Search Control Software', 'Angular Velocity Measurement Data'),
+    ('Gyroscopes', 'Sun Search Control Software', 'Angular Velocity Analog Signal'),
+    ('Three-axis Control Thrusters', 'Sun Search Control Software', 'Three-axis Torque Control'),
+    ('Data Management Computer', 'Sun Search Control Software', 'Ground Command Reception and Telemetry Data Transmission'),
+    ('Control Computer CPU', 'Sun Search Control Software', 'Timer Interrupt Signal'),
+    ('Control Computer CPU', 'Sun Search Control Software', 'Mode Register Data'),
+    ('Gyroscopes', 'Control Computer CPU', 'Gyro Communication'),
+    ('Sun Sensors', 'Control Computer CPU', 'Sun Sensor Data Acquisition'),
+    ('Three-axis Control Thrusters', 'Control Computer CPU', 'Thruster Data Acquisition'),
+    ('Mode Register', 'Sun Search Control Software', 'Operating Mode Word'),
+    ('Sun Search Control Software', 'Digital Tube', 'Telemetry Packaging'),
+    ('Sun Search Control Software', 'Timer', 'Control Cycle'),
+    ('Sun Search Control Software', 'Satellite', 'Attitude Angle and Angular Velocity')
+]
+for sharing in phenomena_sharing:
+    dot.edge(sharing[0], sharing[1], label=sharing[2], style='solid', dir='none')# 添加现象共享 rankdir：指定图形的布局方向 nodesep：指定节点之间的水平间距 ranksep：指定节点之间的垂直间距。
+dot.attr(rankdir='LR',nodesep='0.1',ranksep='0.5')
+# 保存并展示图
+dot.render('Sun', format='png',cleanup=True)
+
