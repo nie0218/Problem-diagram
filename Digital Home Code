@@ -1,0 +1,101 @@
+import graphviz
+
+# 创建图
+dot = graphviz.Digraph()
+# Define nodes for machine domain
+dot.node('Digital Home', shape='component')
+
+# 给定领域和设计领域节点
+given_domains = [
+    'Thermostat',
+    'Humidistat',
+    'Magnetic Alarm Contact Switches',
+    'Security Sound and Light Alarms',
+    'Appliances',
+    'Web-ready Computers',
+    'Cell Phones',
+    'Broadband Internet Connection',
+    'Analog-to-Digital Converter',
+    'Power Switch',
+    'User',
+    'Contact Sensors',
+    'Light Alarms',
+    'Web Server',
+    'DH Gateway Device',
+    'Environmental Controllers',
+    'Home Database',
+    'Sound Alarm Subsystem',
+    'Light Alarm Subsystem',
+    'Appliance Manager',
+    'Digital Home Planner',
+    'Report Generator'
+]
+
+for domain in given_domains:
+    dot.node(domain, shape='box')
+    dot.edge('Digital Home',domain, dir='none')
+
+
+# 添加需求领域和现象
+requirements = [
+    ('Thermostat', 'Constraint', 'Monitoring and regulating temperature'),
+    ('Thermostat', 'Reference', 'Providing current temperature reading'),
+    ('Thermostat', 'Reference', 'Providing set point temperature'),
+    ('Thermostat', 'Constraint', 'Operating within sensitivity range of 14°F to 104°F'),
+    ('Humidistat', 'Constraint', 'Monitoring and regulating humidity'),
+    ('Humidistat', 'Reference', 'Providing current humidity reading'),
+    ('Humidistat', 'Reference', 'Providing set point humidity'),
+    ('Humidistat', 'Constraint', 'Setting humidity level between 30% to 60%'),
+    ('Light Alarms', 'Constraint', 'Activating in response to security breach'),
+    ('Contact Sensors', 'Constraint', 'Monitoring entry via door or window'),
+    ('Magnetic Alarm Contact Switches', 'Reference', 'Entry monitoring function'),
+    ('Security Sound and Light Alarms', 'Reference', 'Issuing security breach alerts'),
+    ('DH Gateway Device', 'Reference', 'Functioning as communication center'),
+    ('DH Gateway Device', 'Constraint', 'Connecting to broadband internet'),
+    ('Contact Sensors', 'Reference', 'Reading and transmitting values'),
+    ('Environmental Controllers', 'Reference', 'Sending control values'),
+    ('Power Switch', 'Constraint', 'Monitoring appliance state'),
+    ('Power Switch', 'Constraint', 'Changing appliance state'),
+    ('Power Switch', 'Constraint', 'Maintaining manual state settings'),
+    ('Web Server', 'Constraint', 'Enabling remote control of DH System'),
+    ('Web Server', 'Constraint', 'Serving as central communication hub'),
+    ('Home Database', 'Constraint', 'Storing sensor data'),
+    ('Home Database', 'Constraint', 'Archiving controller values'),
+    ('Appliance Manager', 'Constraint', 'Managing small household appliances'),
+    ('Appliance Manager', 'Constraint', 'Turning appliances on or off'),
+    ('Digital Home Planner', 'Constraint', 'Directing pre-set home parameters'),
+    ('Digital Home Planner', 'Constraint', 'Creating and adjusting monthly plans'),
+    ('Report Generator', 'Constraint', 'Producing management and control reports'),
+    ('Report Generator', 'Constraint', 'Delivering monthly summary reports')
+]
+
+for requirement in requirements:
+    dot.node(requirement[2], shape='ellipse', style='dashed')
+    if requirement[1] == 'Reference':
+        dot.edge(requirement[0], requirement[2], style='dashed', dir='none')
+    elif requirement[1] == 'Constraint':
+        dot.edge(requirement[0], requirement[2], style='dashed', dir='back')
+
+# 添加现象共享
+phenomena_sharing = [
+    ('Thermostat', 'DH Gateway Device', 'Wireless Communication'),
+    ('Humidistat', 'DH Gateway Device', 'Wireless Communication'),
+    ('Magnetic Alarm Contact Switches', 'Digital Home', 'Entry Monitoring'),
+    ('Security Sound and Light Alarms', 'Digital Home', 'Security Breach Alert'),
+    ('Power Switch', 'Digital Home', 'Appliance State Monitoring'),
+    ('Power Switch', 'Digital Home', 'Appliance State Change'),
+    ('Digital Home', 'Web Server', 'Web-based Control'),
+    ('Digital Home', 'DH Gateway Device', 'Broadband Internet Connection'),
+    ('Digital Home', 'Contact Sensors', 'Value Reading'),
+    ('Environmental Controllers', 'DH Gateway Device', 'Value Sending'),
+    ('Digital Home', 'User', 'Read Humidity at Humidistat Location'),
+    ('Digital Home', 'User', 'Set Humidity Level'),
+    ('DH Gateway Device', 'Home Database', 'Storing sensor values'),
+    ('DH Gateway Device', 'Home Database', 'Storing controller values')
+]
+for sharing in phenomena_sharing:
+    dot.edge(sharing[0], sharing[1], label=sharing[2], style='solid', dir='none')
+# 添加现象共享 rankdir：指定图形的布局方向 nodesep：指定节点之间的水平间距 ranksep：指定节点之间的垂直间距。
+dot.attr(rankdir='LR',nodesep='0.1',ranksep='0.5')
+# 保存并展示图
+dot.render('Digital Home', format='png',cleanup=True)
