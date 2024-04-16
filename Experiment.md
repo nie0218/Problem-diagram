@@ -17,55 +17,54 @@ D. Jin, C. Wang and Z. Jin, "Automating Extraction of Problem Diagrams from Natu
 可以看到在Phenomenon Sharing中我们可以成功提取到SS和DMC之间的共享现象（加粗部分）
 
 #Machine Domain
-- SunSearchControlSoftware
+- Sun Search Control Software
 
 #Given Domain
 - Gyroscopes
-- SunSensors
-- ThreeAxisControlThrusters
-- DataManagementComputer
-- SerialPort
-- Analog-to-DigitalConverter
-- StoredCircuit
-- Timer
-- ControllerRegisters
-- DigitalTube
-
-- InterruptServiceProgram
+- Sun Sensors
+- Three-axis Control Thrusters
+- Data Management Computer
+- Control Computer CPU
 - Satellite
-
+- Mode Register
+- Timer
+- Analog-to-Digital Converter
+- Digital Tube
 #Design Domain
-- ControlSystem
+- Serial Ports
+- Timing Control Register
 
 #Requirement Domain
+- <Satellite, Reference, Attitude Determination>
 - <Gyroscopes, Reference, Data Acquisition>
-- <Gyroscopes, Constraint, Address for Sending Commands and Receiving Data>
-- <SunSensors, Reference, Data Acquisition>
-- <SunSensors, Constraint, Data Collection Format>
-- <ThreeAxisControlThrusters, Reference, Control>
-- <ThreeAxisControlThrusters, Constraint, Jetting Frequency>
-- <ControlSystem, Reference, Composition>
-- <ControlSystem, Constraint, Safety Criticality Level>
-- <InterruptServiceProgram, Reference, Timer Interrupt>
-- <InterruptServiceProgram, Constraint, Timer Configuration>
-- <ControllerRegisters, Reference, Address>
-- <ControllerRegisters, Constraint, Register Configuration>
-- <DigitalTube, Reference, Telemetry Data Transmission>
+- <Sun Sensors, Reference, Data Acquisition>
+- <Three-axis Control Thrusters, Reference, Control>
+- <Data Management Computer, Reference, Command Processing>
+- <Gyroscopes, Constraint, Data Acquisition Command>
+- <Gyroscopes, Constraint, Measurement Data>
+- <Sun Sensors, Constraint, Angle Measurement Data>
+- <Sun Sensors, Constraint, Sun Visible Flag>
+- <Three-axis Control Thrusters, Constraint, Power Status Signal>
+- <Three-axis Control Thrusters, Constraint, Thruster Control>
+- <Sun Sensors, Reference, Sun Sensor Switching Instruction>
+- < Analog-to-Digital Converter, Constraint, Data Conversion>
+- < Analog-to-Digital Converter, Reference, Signal Collection>
+- < Digital Tube, Reference, Telemetry Data Transmission >
 
 #Phenomenon Sharing
-- <SunSearchControlSoftware, Gyroscopes, Data Acquisition>
-- <SunSearchControlSoftware, Gyroscopes, Address for Sending Commands and Receiving Data>
-- <SunSearchControlSoftware, SunSensors, Data Acquisition>
-- <SunSearchControlSoftware, SunSensors, Data Collection Format>
-- <SunSearchControlSoftware, ThreeAxisControlThrusters, Control>
-- <SunSearchControlSoftware, ThreeAxisControlThrusters, Jetting Frequency>
-- <SunSearchControlSoftware, InterruptServiceProgram, Timer Interrupt>
-- <SunSearchControlSoftware, ControllerRegisters, Address>
-- <SunSearchControlSoftware, DigitalTube, Telemetry Data Transmission>
-- <SunSearchControlSoftware, SerialPort, Data Transmission>
-- <SunSearchControlSoftware, Timer, Control Cycle>
-- <SunSearchControlSoftware, SerialPort, Command Reception and Data Transmission>
-- <SunSensors, Analog-to-DigitalConverter, Data Conversion>
-- <ThreeAxisControlThrusters, Analog-to-DigitalConverter, Data Conversion>
-- **<DataManagementComputer, SunSearchControlSoftware, Ground Command Reception>**
-- <Satellite, SunSearchControlSoftware, Attitude Angle and Angular Velocity>
+- <Sun Sensors, Sun Search Control Software, Sun Measurement Angle>
+- <Sun Sensors, Sun Search Control Software, Sun Visible Flag>
+- <Gyroscopes, Sun Search Control Software, Angular Velocity Measurement Data>
+- <Gyroscopes, Sun Search Control Software, Angular Velocity Analog Signal>
+- <Three-axis Control Thrusters, Sun Search Control Software, Three-axis Torque Control>
+- <Data Management Computer, Sun Search Control Software, Ground Command Reception and Telemetry Data Transmission >
+- <Control Computer CPU, Sun Search Control Software, Timer Interrupt Signal>
+- <Control Computer CPU, Sun Search Control Software, Mode Register Data>
+- <Gyroscopes, Control Computer CPU, Gyro Communication>
+- <Sun Sensors, Control Computer CPU, Sun Sensor Data Acquisition>
+- <Three-axis Control Thrusters, Control Computer CPU, Thruster Data Acquisition>
+-<Mode Register, Sun Search Control Software, Operating Mode Word>
+-< Sun Search Control Software, Digital Tube, Telemetry Packaging>
+-< Sun Search Control Software, Timer, Control Cycle>
+-< Sun Search Control Software, Satellite, Attitude Angle and Angular Velocity>
+
